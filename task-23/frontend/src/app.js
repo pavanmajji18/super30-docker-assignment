@@ -55,29 +55,54 @@ function renderTable(students) {
 
   students.forEach((s) => {
     const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>#${s.id}</td>
-      <td><strong>${escapeHtml(s.full_name)}</strong></td>
-      <td>${escapeHtml(s.email)}</td>
-      <td><span class="badge">${escapeHtml(s.course)}</span></td>
-      <td><code>${escapeHtml(s.enrollment_number)}</code></td>
-      <td class="action-btns">
-        <button class="btn edit" onclick="editStudent(${s.id}, '${escapeJsStr(s.full_name)}', '${escapeJsStr(s.email)}', '${escapeJsStr(s.course)}', '${escapeJsStr(s.enrollment_number)}')">Edit</button>
-        <button class="btn danger" onclick="deleteStudent(${s.id})">Delete</button>
-      </td>
-    `;
+
+    const idTd = document.createElement("td");
+    idTd.textContent = `#${s.id}`;
+
+    const nameTd = document.createElement("td");
+    const nameStrong = document.createElement("strong");
+    nameStrong.textContent = s.full_name;
+    nameTd.appendChild(nameStrong);
+
+    const emailTd = document.createElement("td");
+    emailTd.textContent = s.email;
+
+    const courseTd = document.createElement("td");
+    const courseSpan = document.createElement("span");
+    courseSpan.className = "badge";
+    courseSpan.textContent = s.course;
+    courseTd.appendChild(courseSpan);
+
+    const enrollTd = document.createElement("td");
+    const enrollCode = document.createElement("code");
+    enrollCode.textContent = s.enrollment_number;
+    enrollTd.appendChild(enrollCode);
+
+    const actionTd = document.createElement("td");
+    actionTd.className = "action-btns";
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn edit";
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", () => editStudent(s.id, s.full_name, s.email, s.course, s.enrollment_number));
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "btn danger";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => deleteStudent(s.id));
+
+    actionTd.appendChild(editBtn);
+    actionTd.appendChild(deleteBtn);
+
+    row.appendChild(idTd);
+    row.appendChild(nameTd);
+    row.appendChild(emailTd);
+    row.appendChild(courseTd);
+    row.appendChild(enrollTd);
+    row.appendChild(actionTd);
+
     studentTableBody.appendChild(row);
   });
-}
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, function(m) {
-    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-  });
-}
-
-function escapeJsStr(str) {
-  return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
 studentForm.addEventListener("submit", async (e) => {
