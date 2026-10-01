@@ -84,7 +84,7 @@ function renderTable(students) {
     const editBtn = document.createElement("button");
     editBtn.className = "btn edit";
     editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", () => editStudent(s.id, s.full_name, s.email, s.course, s.enrollment_number));
+    editBtn.addEventListener("click", () => editStudent(s));
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn danger";
@@ -157,15 +157,15 @@ async function deleteStudent(id) {
   }
 }
 
-function editStudent(id, name, email, course, enrollment) {
-  document.getElementById("studentId").value = id;
-  document.getElementById("fullName").value = name;
-  document.getElementById("email").value = email;
-  document.getElementById("course").value = course;
-  document.getElementById("enrollmentNumber").value = enrollment;
+function editStudent(student) {
+  document.getElementById("studentId").value = student.id;
+  document.getElementById("fullName").value = student.full_name;
+  document.getElementById("email").value = student.email;
+  document.getElementById("course").value = student.course;
+  document.getElementById("enrollmentNumber").value = student.enrollment_number;
 
   formTitle.innerText = "Update Student Record";
-  formBadge.innerText = `Editing #${id}`;
+  formBadge.innerText = `Editing #${student.id}`;
   submitBtn.innerText = "Save Changes";
   cancelBtn.style.display = "inline-flex";
 
