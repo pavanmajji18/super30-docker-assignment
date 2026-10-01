@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Environment files
+.env
+!.env.example
+
+# Docker / OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Personal Guidance & Internal Study Docs (Not pushed to Git)
+GUIDANCE.md
+SOLUTION_GUIDE.md
+guidance/
+
