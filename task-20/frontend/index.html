@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Three-Tier Docker Architecture Demo</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      text-align: center;
+      max-width: 500px;
+    }
+    h1 { color: #38bdf8; margin-bottom: 0.5rem; }
+    p { color: #94a3b8; line-height: 1.5; }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Super 30 Three-Tier App</h1>
+    <p>Frontend (Nginx) &rarr; Backend API (FastAPI) &rarr; Database (PostgreSQL)</p>
+    <div class="badge">Task 20 Completed</div>
+  </div>
+</body>
+</html>
