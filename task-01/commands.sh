@@ -1,14 +1,13 @@
 #!/bin/bash
-# Task 1: Pull the latest Ubuntu Docker image and run it interactively
+# Task 1: Pull latest Ubuntu Docker image and execute 5 Linux commands inside container
+echo "=== Pulling Ubuntu latest image ==="
 docker pull ubuntu:latest
 
-# Run interactively:
-# docker run -it --name task1-ubuntu ubuntu:latest bash
-
-# Commands executed inside the container:
-# 1. uname -a                     # Check kernel & system architecture
-# 2. whoami                       # View active user (root)
-# 3. cat /etc/os-release          # View OS distribution details
-# 4. pwd                          # Print working directory
-# 5. apt-get update               # Refresh package manager indexes
-# exit
+echo "=== Running Ubuntu container and executing 5 Linux commands ==="
+docker run --rm --name task1-ubuntu ubuntu:latest bash -c "
+  echo '1. Kernel & Architecture:' && uname -a && \
+  echo '2. Active User:' && whoami && \
+  echo '3. OS Distribution Details:' && cat /etc/os-release && \
+  echo '4. Current Working Directory:' && pwd && \
+  echo '5. APT Package Manager Refresh:' && apt-get update
+"
