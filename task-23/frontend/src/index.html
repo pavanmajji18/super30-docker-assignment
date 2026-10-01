@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super 30 - Student Management Portal</title>
+  <meta name="description" content="Enterprise Microservices Architecture Student Management System powered by FastAPI, PostgreSQL, Nginx, and Docker Compose.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="container">
+    <header class="app-header">
+      <div class="header-content">
+        <div class="brand">
+          <div class="logo-icon">🚀</div>
+          <div>
+            <h1>Super 30 Student Portal</h1>
+            <p class="tagline">Enterprise Microservices Architecture (FastAPI + PostgreSQL + Nginx)</p>
+          </div>
+        </div>
+        <div class="system-status">
+          <span class="status-indicator active"></span>
+          <span class="status-text" id="dbStatus">DB Connected</span>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-info">
+            <span class="stat-value" id="statTotalStudents">0</span>
+            <span class="stat-label">Total Enrolled</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div class="stat-info">
+            <span class="stat-value" id="statTotalCourses">0</span>
+            <span class="stat-label">Active Courses</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-info">
+            <span class="stat-value">Dockerized</span>
+            <span class="stat-label">3-Tier Stack</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Form Section -->
+      <section class="card form-card">
+        <div class="card-header">
+          <h2 id="formTitle">Register New Student</h2>
+          <span class="badge" id="formBadge">Create Mode</span>
+        </div>
+        <form id="studentForm">
+          <input type="hidden" id="studentId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="e.g. Pavan Kumar" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="e.g. pavan@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="course">Course Name</label>
+              <input type="text" id="course" placeholder="e.g. Generative AI & Docker" required>
+            </div>
+            <div class="form-group">
+              <label for="enrollmentNumber">Enrollment ID</label>
+              <input type="text" id="enrollmentNumber" placeholder="e.g. STU-2026-001" required>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn primary" id="submitBtn">
+              <span>Save Student Record</span>
+            </button>
+            <button type="button" class="btn secondary" id="cancelBtn" style="display:none;">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Table Section -->
+      <section class="card table-card">
+        <div class="table-header">
+          <div>
+            <h2>Enrolled Students Directory</h2>
+            <p class="sub-text">Real-time persistent records from PostgreSQL</p>
+          </div>
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by name or enrollment ID...">
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Email Address</th>
+                <th>Course</th>
+                <th>Enrollment ID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-icon">📂</div>
+          <p>No student records found.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
