@@ -8,16 +8,17 @@ from sqlalchemy.orm import declarative_base, sessionmaker, Session
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://admin:adminpassword@db:5432/super30_db"
+    "postgresql+psycopg2://admin:adminpassword@db:5432/super30_db"
 )
 
-engine = None
-for attempt in range(10):
+engine = create_engine(DATABASE_URL)
+for attempt in range(15):
     try:
-        engine = create_engine(DATABASE_URL)
         with engine.connect():
             break
-    except Exception:
+    except Exception as e:
+        if attempt == 14:
+            raise e
         time.sleep(2)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
